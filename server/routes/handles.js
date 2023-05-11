@@ -1,11 +1,13 @@
 const express=require('express');
 const router = express.Router();
 
-router.get('/:codeforces_id',(req,res,next)=>{
-    console.log(req.params.codeforces_id);
+router.get('/codeforces',(req,res,next)=>{
+    console.log(req.body.codeforces_id);
     res.status(200).json({
-        Message:"successful"
+        essage:"successful"
     })
 })
 
 module.exports=router;
+
+//localhost:3001/handle/codeforces

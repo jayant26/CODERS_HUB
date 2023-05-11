@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Axios from "axios";
 export const Home = () => {
   const [codeforces_id, setcodeforces_id] = useState("");
   const [leetcode_id, setleetcode_id] = useState("");
@@ -9,6 +9,17 @@ export const Home = () => {
   const handleRedirect = (url) => {
     window.location.href = url;
   };
+
+  const get_codeforces_detail=()=>{
+    console.log(codeforces_id); 
+    Axios.post("https://localhost:3001/handle/codeforces",{
+    
+        codeforces_id:codeforces_id
+
+     }).then((response)=>{
+        alert("response.data.message");
+     })
+  }
 
   return (
     <div>
@@ -26,7 +37,10 @@ export const Home = () => {
                   }}
                 ></input>
               </label>
-              <button type="submit" className="id_button Search">
+              <button
+               type="submit" 
+               className="id_button Search"
+               onClick={get_codeforces_detail}>
                 Search
               </button>
               <button
