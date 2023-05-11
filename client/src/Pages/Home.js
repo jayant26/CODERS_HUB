@@ -11,13 +11,14 @@ export const Home = () => {
   };
 
   const get_codeforces_detail=()=>{
-    console.log(codeforces_id); 
-    Axios.post("https://localhost:3001/handle/codeforces",{
+    console.log("handle clicked"); 
+    Axios.post("http://localhost:3001/handle/codeforces",{
     
         codeforces_id:codeforces_id
 
      }).then((response)=>{
-        alert("response.data.message");
+        console.log(response);
+        alert(response.data.maxRating);
      })
   }
 
@@ -25,7 +26,7 @@ export const Home = () => {
     <div>
       <div className="details_container">
         <div>
-          <form>
+        <form onSubmit={(e) => e.preventDefault()}>
             <div className="input_container">
               <label>
                 <h4>Codeforces</h4>
