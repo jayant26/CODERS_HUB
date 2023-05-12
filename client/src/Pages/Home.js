@@ -10,23 +10,40 @@ export const Home = () => {
     window.location.href = url;
   };
 
-  const get_codeforces_detail=()=>{
-    console.log("handle clicked"); 
-    Axios.post("http://localhost:3001/handle/codeforces",{
-    
-        codeforces_id:codeforces_id
+  // const get_codeforces_detail=()=>{
+  //   console.log("handle clicked");
+  //   Axios.post("http://localhost:3001/handle/codeforces",{
 
-     }).then((response)=>{
+  //       codeforces_id:codeforces_id
+
+  //    }).then((response)=>{
+  //       console.log(response);
+  //       alert(response.data.maxRating);
+  //    })
+  // }
+  const get_codeforces_detail = () => {
+    console.log("handle clicked");
+    Axios.post("http://localhost:3001/handle/codeforces", {
+      codeforces_id: codeforces_id,
+    })
+      .then((response) => {
         console.log(response);
-        alert(response.data.maxRating);
-     })
-  }
-
+        if (response.data.message === "No user exist!")
+          alert(response.data.message);
+        else {
+          alert(response.data.maxRating);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error occurred while fetching data");
+      });
+  };
   return (
     <div>
       <div className="details_container">
         <div>
-        <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <div className="input_container">
               <label>
                 <h4>Codeforces</h4>
@@ -39,9 +56,10 @@ export const Home = () => {
                 ></input>
               </label>
               <button
-               type="submit" 
-               className="id_button Search"
-               onClick={get_codeforces_detail}>
+                type="submit"
+                className="id_button Search"
+                onClick={get_codeforces_detail}
+              >
                 Search
               </button>
               <button
